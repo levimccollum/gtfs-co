@@ -55,7 +55,7 @@ function displayAgencyInfo(agency) {
     document.getElementById('agencyName').textContent = agency.agency_name || 'Unknown Agency';
     document.getElementById('agencyLocation').textContent = 
         [agency.city, agency.state].filter(Boolean).join(', ') || 'Unknown Location';
-    document.title = `${agency.agency_name} GTFS Feeds | gtfs.co`;
+    document.title = `${agency.agency_name.toLowerCase()} feeds | gtfs.co`;
 }
 
 function populateFilters(feeds) {
@@ -110,23 +110,26 @@ function displayFeeds(feeds) {
         return;
     }
     
-    feedsList.innerHTML = feeds.map(feed => `
-        <div class="feed-item">
-            <div class="feed-header">
-                <div>
-                    <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
-                    ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
+    feedsList.innerHTML = feeds.map(feed => {
+        const cleanUrl = feed.weblink && feed.weblink.startsWith('{') 
+            ? JSON.parse(feed.weblink).url 
+            : feed.weblink;
+            
+        return `
+            <div class="feed-item">
+                <div class="feed-header">
+                    <div>
+                        <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
+                        ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
+                    </div>
+                    <button class="feed-download" onclick="downloadFeed('${cleanUrl}')">
+                        <i data-lucide="download"></i>
+                    </button>
                 </div>
-                <button class="feed-download" onclick="downloadFeed('${feed.weblink}')">
-                    <i data-lucide="download"></i>
-                </button>
+                <a href="${cleanUrl}" target="_blank" class="feed-url">${cleanUrl || 'No URL available'}</a>
             </div>
-            <a href="${feed.weblink}" target="_blank" class="feed-url">${feed.weblink || 'No URL available'}</a>
-        </div>
-    `).join('');
-
-    console.log('Feed weblink:', feed.weblink);
-    console.log('CleanUrl after parsing:', cleanUrl);
+        `;
+    }).join('');
     
     lucide.createIcons();
 }
@@ -150,12 +153,12 @@ function downloadMultiple(feeds) {
     const validFeeds = feeds.filter(f => f.weblink);
     
     if (validFeeds.length === 0) {
-        alert('No downloadable feeds available');
+        alert('no downloadable feeds available');
         return;
     }
     
     if (validFeeds.length > 5) {
-        if (!confirm(`This will open ${validFeeds.length} download links. Continue?`)) {
+        if (!confirm(`this will open ${validFeeds.length} download links. continue?`)) {
             return;
         }
     }
@@ -167,10 +170,10 @@ function downloadMultiple(feeds) {
 
 function showNoFeeds() {
     document.getElementById('feedsList').innerHTML = 
-        '<div class="no-feeds">No GTFS feeds found for this agency</div>';
+        '<div class="no-feeds">no gtfs feeds found for this agency</div>';
 }
 
 function showError() {
     document.getElementById('feedsList').innerHTML = 
-        '<div class="no-feeds">Error loading agency data</div>';
+        '<div class="no-feeds">error loading agency data</div>';
 }
