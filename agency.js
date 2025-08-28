@@ -110,20 +110,36 @@ function displayFeeds(feeds) {
         return;
     }
     
-    feedsList.innerHTML = feeds.map(feed => `
-        <div class="feed-item">
-            <div class="feed-header">
-                <div>
-                    <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
-                    ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
+    feedsList.innerHTML = feeds.map(feed => {
+        // Clean weblink from JSON
+        let cleanUrl = feed.weblink;
+        if (cleanUrl && cleanUrl.startsWith('{')) {
+            try {
+                cleanUrl = JSON.parse(cleanUrl).url;
+            } catch (e) {
+                cleanUrl = null;
+            }
+        }
+        
+        // Generate pretty URL for display
+        const prettyUrl = `/${feed.ntd_id}/${feed.mode.toLowerCase()}${feed.tos ? '-' + feed.tos.toLowerCase() : ''}`;
+        const displayUrl = `gtfs.co${prettyUrl}`;
+            
+        return `
+            <div class="feed-item">
+                <div class="feed-header">
+                    <div>
+                        <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
+                        ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
+                    </div>
+                    <button class="feed-download" onclick="downloadFeed('${cleanUrl}')">
+                        <i data-lucide="download"></i>
+                    </button>
                 </div>
-                <button class="feed-download" onclick="downloadFeed('${feed.weblink}')">
-                    <i data-lucide="download"></i>
-                </button>
+                <a href="${prettyUrl}" class="feed-url">${displayUrl}</a>
             </div>
-            <a href="${feed.weblink}" target="_blank" class="feed-url">${feed.weblink || 'No URL available'}</a>
-        </div>
-    `).join('');
+        `;
+    }).join('');
     
     lucide.createIcons();
 }
