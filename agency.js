@@ -122,11 +122,11 @@ function displayFeeds(feeds) {
                         <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
                         ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
                     </div>
-                    <button class="feed-download" onclick="downloadFeed('${cleanUrl}')">
-                        <i data-lucide="download"></i>
-                    </button>
                 </div>
                 <a href="${cleanUrl}" target="_blank" class="feed-url">${cleanUrl || 'No URL available'}</a>
+                <button class="feed-download" onclick="downloadFeed('${cleanUrl}')">
+                    <i data-lucide="download"></i>
+                </button>
             </div>
         `;
     }).join('');
