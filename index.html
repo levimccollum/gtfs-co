@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <title>GTFS Data Aggregator | gtfs.co</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>gtfs.co</h1>
+            <p>search and download gtfs feeds from u.s. transit agencies</p>
+        </div>
+        
+        <div class="search-container">
+            <div class="floating-input search-input">
+                <input type="text" id="agencySearch" placeholder=" " autocomplete="off">
+                <label for="agencySearch">find gtfs feeds by agency name, city, or state</label>
+                <div class="search-icon">
+                    <i data-lucide="search"></i>
+                </div>
+            </div>
+            
+            <div class="search-results" id="searchResults" style="display: none;">
+                <div class="results-loading" id="loadingIndicator">
+                    <i data-lucide="loader-2"></i>
+                    searching...
+                </div>
+                <div class="results-list" id="resultsList"></div>
+            </div>
+        </div>
+
+        <div class="info-section">
+            <p class="info-text">
+                access an agency's files direclty at gtfs.co/[ntd-id]
+            </p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

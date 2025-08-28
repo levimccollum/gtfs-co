@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <title>Agency GTFS Feeds | gtfs.co</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="back-link">
+                <i data-lucide="arrow-left"></i>
+                back to search
+            </a>
+            <h1 id="agencyName">Loading...</h1>
+            <p id="agencyLocation">Loading location...</p>
+        </div>
+        
+        <div class="editor-container">
+            <div class="feeds-header">
+                <h2>available gtfs feeds</h2>
+                <div class="filter-controls">
+                    <div class="floating-input">
+                        <select id="modeFilter">
+                            <option value="">all modes</option>
+                        </select>
+                        <label for="modeFilter">filter by mode</label>
+                    </div>
+                    <div class="floating-input">
+                        <select id="tosFilter">
+                            <option value="">all service types</option>
+                        </select>
+                        <label for="tosFilter">filter by service type</label>
+                    </div>
+                </div>
+            </div>
+
+            <div class="feeds-list" id="feedsList">
+                <div class="loading-feeds">
+                    <i data-lucide="loader-2"></i>
+                    loading feeds...
+                </div>
+            </div>
+
+            <div class="button-group">
+                <button type="button" class="btn-secondary" id="downloadAll">
+                    <i data-lucide="download"></i>
+                    download all
+                </button>
+                <button type="button" class="btn-primary" id="downloadFiltered">
+                    <i data-lucide="filter"></i>
+                    download filtered
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="agency.js"></script>
+</body>
+</html>
