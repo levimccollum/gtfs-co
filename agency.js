@@ -103,8 +103,10 @@ function applyFilters() {
 }
 
 function displayFeeds(feeds) {
-    const feedsList = document.getElementById('feedsList');
-    
+    const cleanUrl = feed.weblink && feed.weblink.startsWith('{') 
+        ? JSON.parse(feed.weblink).url 
+        : feed.weblink;
+        
     if (feeds.length === 0) {
         feedsList.innerHTML = '<div class="no-feeds">No feeds match the selected filters</div>';
         return;
@@ -121,7 +123,7 @@ function displayFeeds(feeds) {
                     <i data-lucide="download"></i>
                 </button>
             </div>
-            <a href="${feed.weblink}" target="_blank" class="feed-url">${feed.weblink || 'No URL available'}</a>
+            <a href="${cleanUrl}" target="_blank" class="feed-url">${cleanUrl || 'No URL available'}</a>
         </div>
     `).join('');
     

@@ -91,7 +91,18 @@ class DataSyncer {
             city: record.city || null,
             state: record.state || null,
             url: record.url || null,
-            weblink: record.weblink || null,
+            weblink: (() => {
+                let weblink = record.weblink;
+                if (weblink && weblink.startsWith('{')) {
+                    try {
+                        const parsed = JSON.parse(weblink);
+                        return parsed.url || null;
+                    } catch (e) {
+                        return null;
+                    }
+                }
+                return weblink;
+            })(),
             mode: record.mode || null,
             tos: record.tos || null,
             reporter_type: record.reporter_type || null,
