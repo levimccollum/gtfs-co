@@ -61,8 +61,8 @@ async function performSearch(query) {
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzeWhvbWRrdG9oZWphbnl5eXN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzODkzNzEsImV4cCI6MjA3MTk2NTM3MX0.sH8eNMMmmNjwPDmmUM29mXSgIA--cQiVbmgRsjh7hm0';
         
         const searchQuery = encodeURIComponent(`%${query}%`);
-        const url = `${SUPABASE_URL}/rest/v1/gtfs_agencies?or=(agency_name.ilike.${searchQuery},city.ilike.${searchQuery},state.ilike.${searchQuery})&select=ntd_id,agency_name,city,state&limit=10`;
-        
+        const url = `${SUPABASE_URL}/rest/v1/gtfs_agencies?or=(agency_name.ilike.${searchQuery},city.ilike.${searchQuery},state.ilike.${searchQuery})&select=ntd_id,agency_name,city,state&limit=50`;
+
         const response = await fetch(url, {
             headers: {
                 'apikey': SUPABASE_ANON_KEY,
@@ -86,12 +86,17 @@ async function performSearch(query) {
 function displayResults(results) {
     showResults();
     
-    if (results.length === 0) {
+    // Remove duplicates by ntd_id
+    const unique = results.filter((agency, index, self) => 
+        index === self.findIndex(a => a.ntd_id === agency.ntd_id)
+    );
+    
+    if (unique.length === 0) {
         resultsList.innerHTML = '<div class="result-item">No agencies found</div>';
         return;
     }
     
-    resultsList.innerHTML = results.map(agency => {
+    resultsList.innerHTML = unique.slice(0, 10).map(agency => {
         const ntdId = agency.ntd_id || 'N/A';
         const agencyName = agency.agency_name || 'Unknown Agency';
         const location = [agency.city, agency.state].filter(Boolean).join(', ') || 'Unknown Location';
