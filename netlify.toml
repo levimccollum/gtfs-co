@@ -8,6 +8,17 @@
   conditions = {Role = ["*"]}
   force = false
 
+# Explicitly serve static assets
+[[redirects]]
+  from = "/*.css"
+  to = "/:splat.css"
+  status = 200
+
+[[redirects]]
+  from = "/*.js"
+  to = "/:splat.js"
+  status = 200
+
 [[headers]]
   for = "/*"
   [headers.values]
