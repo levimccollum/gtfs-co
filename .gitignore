@@ -1,0 +1,4 @@
+echo ".DS_Store" >> .gitignore
+git add .gitignore
+git commit -m "Ignore DS_Store files"
+git push origin main
