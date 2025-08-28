@@ -6,6 +6,7 @@
   to = "/agency.html"
   status = 200
   conditions = {Role = ["*"]}
+  force = false
 
 [[headers]]
   for = "/*"
