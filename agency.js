@@ -124,6 +124,9 @@ function displayFeeds(feeds) {
             <a href="${feed.weblink}" target="_blank" class="feed-url">${feed.weblink || 'No URL available'}</a>
         </div>
     `).join('');
+
+    console.log('Feed weblink:', feed.weblink);
+    console.log('CleanUrl after parsing:', cleanUrl);
     
     lucide.createIcons();
 }
