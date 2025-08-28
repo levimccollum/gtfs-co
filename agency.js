@@ -54,7 +54,7 @@ function displayAgencyInfo(agency) {
     document.getElementById('agencyName').textContent = agency.agency_name || 'Unknown Agency';
     document.getElementById('agencyLocation').textContent = 
         [agency.city, agency.state].filter(Boolean).join(', ') || 'Unknown Location';
-    document.title = `${agency.agency_name} GTFS Feeds | gtfs.co`;
+    document.title = `${agency.agency_name.toLowerCase()} feeds | gtfs.co`;
 }
 
 function populateFilters(feeds) {
