@@ -1,5 +1,6 @@
 const SUPABASE_URL = 'https://dsyhomdktohejanyyysy.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzeWhvbWRrdG9oZWphbnl5eXN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzODkzNzEsImV4cCI6MjA3MTk2NTM3MX0.sH8eNMMmmNjwPDmmUM29mXSgIA--cQiVbmgRsjh7hm0';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRzeWhvbWRrdG9oZWphbnl5eXN5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTYzODkzNzEsImV4cCI6MjA3MVx2NTM3MX0.sH8eNMMmmNjwPDmmUM29mXSgIA--cQiVbmgRsjh7hm0';
+
 let allFeeds = [];
 let filteredFeeds = [];
 
@@ -54,7 +55,7 @@ function displayAgencyInfo(agency) {
     document.getElementById('agencyName').textContent = agency.agency_name || 'Unknown Agency';
     document.getElementById('agencyLocation').textContent = 
         [agency.city, agency.state].filter(Boolean).join(', ') || 'Unknown Location';
-    document.title = `${agency.agency_name.toLowerCase()} feeds | gtfs.co`;
+    document.title = `${agency.agency_name} GTFS Feeds | gtfs.co`;
 }
 
 function populateFilters(feeds) {
@@ -109,26 +110,20 @@ function displayFeeds(feeds) {
         return;
     }
     
-    feedsList.innerHTML = feeds.map(feed => {
-        const cleanUrl = feed.weblink && feed.weblink.startsWith('{') 
-            ? JSON.parse(feed.weblink).url 
-            : feed.weblink;
-            
-        return `
-            <div class="feed-item">
-                <div class="feed-header">
-                    <div>
-                        <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
-                        ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
-                    </div>
-                    <button class="feed-download" onclick="downloadFeed('${cleanUrl}')">
-                        <i data-lucide="download"></i>
-                    </button>
+    feedsList.innerHTML = feeds.map(feed => `
+        <div class="feed-item">
+            <div class="feed-header">
+                <div>
+                    <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
+                    ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
                 </div>
-                <a href="${cleanUrl}" target="_blank" class="feed-url">${cleanUrl || 'No URL available'}</a>
+                <button class="feed-download" onclick="downloadFeed('${feed.weblink}')">
+                    <i data-lucide="download"></i>
+                </button>
             </div>
-        `;
-    }).join('');
+            <a href="${feed.weblink}" target="_blank" class="feed-url">${feed.weblink || 'No URL available'}</a>
+        </div>
+    `).join('');
     
     lucide.createIcons();
 }

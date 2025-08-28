@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <title>download | gtfs.co</title>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="/" class="back-link">
+                <i data-lucide="arrow-left"></i>
+                back to search
+            </a>
+            <h1 id="feedTitle">preparing download...</h1>
+            <p id="feedDetails">loading feed information...</p>
+        </div>
+        
+        <div class="editor-container">
+            <div class="download-status" id="downloadStatus">
+                <div class="loading-feeds">
+                    <i data-lucide="loader-2"></i>
+                    locating gtfs feed...
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="feed.js"></script>
+</body>
+</html>

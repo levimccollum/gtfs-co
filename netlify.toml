@@ -5,9 +5,24 @@
   from = "/:ntdid"
   to = "/agency.html"
   status = 200
+  conditions = {Role = ["*"]}
   force = false
 
+# Explicitly serve static assets
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
-  status = 404
+  from = "/*.css"
+  to = "/:splat.css"
+  status = 200
+
+[[redirects]]
+  from = "/*.js"
+  to = "/:splat.js"
+  status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-XSS-Protection = "1; mode=block"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

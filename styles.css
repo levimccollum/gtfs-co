@@ -287,6 +287,62 @@ button i {
     line-height: 1.6;
 }
 
+/* Download States */
+.download-status {
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.download-ready,
+.download-complete,
+.download-error {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.download-ready i,
+.download-complete i,
+.download-error i {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 16px;
+    color: #6b7280;
+}
+
+.download-complete i {
+    color: #10b981;
+}
+
+.download-error i {
+    color: #dc2626;
+}
+
+.download-ready p,
+.download-complete p,
+.download-error p {
+    font-size: 18px;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+}
+
+.download-link,
+.back-to-agency,
+.back-to-search {
+    color: #4C88F7;
+    text-decoration: none;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.download-link:hover,
+.back-to-agency:hover,
+.back-to-search:hover {
+    color: #3b73e6;
+    text-decoration: underline;
+}
+
 /* Floating Input Styles (from original) */
 .floating-input {
     position: relative;
@@ -389,6 +445,9 @@ button {
     transition: all 0.15s ease;
     background: white;
     color: #374151;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 button:hover {
