@@ -2,6 +2,12 @@
   publish = "."
 
 [[redirects]]
-  from = "/[0-9]*"
+  from = "/:ntdid"
   to = "/agency.html"
   status = 200
+  force = false
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 404
