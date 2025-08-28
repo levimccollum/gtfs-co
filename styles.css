@@ -237,6 +237,7 @@ body {
     color: #4C88F7;
     text-decoration: none;
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+    padding-left: 5;
     word-break: break-all;
     margin-right: 12px;
     flex: 1;

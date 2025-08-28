@@ -118,7 +118,6 @@ function showError(message) {
         <div class="download-error">
             <i data-lucide="alert-circle"></i>
             <p>${message}</p>
-            <a href="/" class="back-to-search">back to search</a>
         </div>
     `;
     lucide.createIcons();
