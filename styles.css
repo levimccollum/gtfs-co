@@ -202,20 +202,35 @@ body {
     border-radius: 6px;
     margin-bottom: 12px;
     background: #fafafa;
-    transition: background-color 0.15s ease;
+    transition: all 0.15s ease;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    cursor: pointer;
+    text-decoration: none;
+    color: inherit;
 }
 
 .feed-item:hover {
-    background-color: #f3f4f6;
+    background: #f3f4f6;
+    border-color: #d1d5db;
 }
 
 .feed-header {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 24px;
+}
+
+.feed-url {
+    font-size: 14px;
+    color: #4C88F7;
+    text-decoration: none;
+    font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+    word-break: break-all;
+    margin-right: 12px;
+    flex: 1;
+    pointer-events: none;
 }
 
 .feed-mode {
@@ -230,16 +245,6 @@ body {
     color: #6b7280;
     padding: 2px 8px;
     border-radius: 12px;
-}
-
-.feed-url {
-    font-size: 14px;
-    color: #4C88F7;
-    text-decoration: none;
-    font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
-    word-break: break-all;
-    margin-right: 12px;
-    flex: 1;
 }
 
 .feed-url:hover {

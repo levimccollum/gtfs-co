@@ -116,14 +116,15 @@ function displayFeeds(feeds) {
             : feed.weblink;
             
         return `
-            <div class="feed-item">
+            <div class="feed-item" onclick="event.preventDefault(); window.open('${cleanUrl}', '_blank'); return false;">
                 <div class="feed-header">
                     <div>
                         <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
                         ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
                     </div>
                 </div>
-                <a href="${cleanUrl}" onclick="event.preventDefault(); window.open('${cleanUrl}', '_blank'); return false;" class="feed-url">gtfs.co/${feed.ntd_id}/${feed.mode.toLowerCase()}${feed.tos ? '-' + feed.tos.toLowerCase() : ''}</a>
+                <span class="feed-url">gtfs.co/${feed.ntd_id}/${feed.mode.toLowerCase()}${feed.tos ? '-' + feed.tos.toLowerCase() : ''}</span>
+                <button class="feed-download" onclick="event.stopPropagation(); downloadFeed('${cleanUrl}')">
                     <i data-lucide="download"></i>
                 </button>
             </div>
