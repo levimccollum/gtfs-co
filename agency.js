@@ -123,8 +123,7 @@ function displayFeeds(feeds) {
                         ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
                     </div>
                 </div>
-                <a href="${cleanUrl}" target="_blank" class="feed-url">${cleanUrl || 'No URL available'}</a>
-                <button class="feed-download" onclick="downloadFeed('${cleanUrl}')">
+                <a href="${cleanUrl}" onclick="event.preventDefault(); window.open('${cleanUrl}', '_blank'); return false;" class="feed-url">gtfs.co/${feed.ntd_id}/${feed.mode.toLowerCase()}${feed.tos ? '-' + feed.tos.toLowerCase() : ''}</a>
                     <i data-lucide="download"></i>
                 </button>
             </div>
@@ -135,11 +134,7 @@ function displayFeeds(feeds) {
 }
 
 function setupDownloadButtons() {
-    document.getElementById('downloadAll').addEventListener('click', () => {
-        downloadMultiple(allFeeds);
-    });
-    
-    document.getElementById('downloadFiltered').addEventListener('click', () => {
+    document.getElementById('downloadDisplayed').addEventListener('click', () => {
         downloadMultiple(filteredFeeds);
     });
 }
