@@ -118,10 +118,8 @@ function displayFeeds(feeds) {
         return `
             <div class="feed-item" onclick="event.preventDefault(); window.open('${cleanUrl}', '_blank'); return false;">
                 <div class="feed-header">
-                    <div>
-                        <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
-                        ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
-                    </div>
+                    <span class="feed-mode">${feed.mode || 'Unknown Mode'}</span>
+                    ${feed.tos ? `<span class="feed-tos">${feed.tos}</span>` : ''}
                 </div>
                 <span class="feed-url">gtfs.co/${feed.ntd_id}/${feed.mode.toLowerCase()}${feed.tos ? '-' + feed.tos.toLowerCase() : ''}</span>
                 <button class="feed-download" onclick="event.stopPropagation(); downloadFeed('${cleanUrl}')">

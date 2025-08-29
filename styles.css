@@ -219,7 +219,7 @@ body {
 .feed-header {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: 20px;
 }
 
 .feed-url {
