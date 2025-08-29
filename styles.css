@@ -219,7 +219,7 @@ body {
 .feed-header {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 12px;
 }
 
 .feed-url {
@@ -228,6 +228,7 @@ body {
     text-decoration: none;
     font-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
     word-break: break-all;
+    margin-left: 24px;
     margin-right: 12px;
     flex: 1;
     pointer-events: none;
