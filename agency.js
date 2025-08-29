@@ -170,7 +170,7 @@ function downloadMultiple(feeds) {
     }
     
     validFeeds.forEach((feed, index) => {
-        setTimeout(() => downloadFeed(feed.weblink), index * 500);
+        setTimeout(() => downloadFeed(feed.weblink), index * 2000);
     });
 }
 
