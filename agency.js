@@ -144,7 +144,19 @@ function downloadFeed(url) {
 }
 
 function downloadMultiple(feeds) {
-    const validFeeds = feeds.filter(f => f.weblink);
+    const validFeeds = feeds.filter(f => f.weblink).map(feed => {
+        // Clean weblink from JSON
+        let cleanUrl = feed.weblink;
+        if (cleanUrl && typeof cleanUrl === 'string' && cleanUrl.includes('{"url":')) {
+            try {
+                const parsed = JSON.parse(cleanUrl);
+                cleanUrl = parsed.url;
+            } catch (e) {
+                cleanUrl = feed.weblink;
+            }
+        }
+        return { ...feed, weblink: cleanUrl };
+    });
     
     if (validFeeds.length === 0) {
         alert('no downloadable feeds available');
